@@ -30,7 +30,7 @@
             <td class="text-center">{{ character.kind }}</td>
         {% endif %}
             <td class="text-center">
-                <a class="text-decoration-none text-dark" href="{{ path('app_character_show', {'identifier': character.identifier}) }}">{{ character.name }}</a>
+                <a class="text-decoration-none text-dark" href="{{ path('api_character_show', {'identifier': character.identifier}) }}">{{ character.name }}</a>
             </td>
             <td class="text-center">{{ character.surname }}</td>
             <td class="text-center">{{ character.caste }}</td>
@@ -41,7 +41,7 @@
             <td class="text-center">{{ character.modification ? character.modification|date("d/m/Y") : '' }}</td>
             <td class="text-center">{{ character.slug }}</td>
             <td class="text-center">
-                <a href="{{ path('app_character_edit', {'identifier': character.identifier}) }}">Modifier</a>
+                <a href="{{ path('api_character_edit', {'identifier': character.identifier}) }}">Modifier</a>
             </td>
         </tr>
     {% else %}
@@ -52,7 +52,7 @@
     </tbody>
 </table>
     <div class="d-flex justify-content-center">
-        <a class="btn btn-primary position-relative" href="{{ path('app_character_new') }}">Nouveau Character</a>
+        <a class="btn btn-primary position-relative" href="{{ path('api_character_new') }}">Nouveau Character</a>
     </div>
 {% endblock %}
 

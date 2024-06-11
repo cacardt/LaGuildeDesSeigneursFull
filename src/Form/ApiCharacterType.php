@@ -49,13 +49,6 @@ class ApiCharacterType extends AbstractType
                 'required' => false,
             )
             )
-            ->add('creation', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('modification', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('slug')
         ;
     }
 

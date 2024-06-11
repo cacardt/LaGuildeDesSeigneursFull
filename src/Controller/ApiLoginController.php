@@ -16,7 +16,7 @@ class ApiLoginController extends AbstractController
         private HttpClientInterface $client
     ) {
     }
-    #[Route(path: '/api_login', name: 'api_login', methods: ['GET', 'POST'])]
+    #[Route(path: '/api-login', name: 'api_login', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
         $response = $this->client->request(
@@ -36,11 +36,5 @@ class ApiLoginController extends AbstractController
             return $this->redirectToRoute('api_character_index', [], Response::HTTP_SEE_OTHER);
         }
         return $this->render('api-login/login.html.twig');
-    }
-
-    #[Route(path: '/logout', name: 'app_logout', methods: ['GET'])]
-    public function logout(): void
-    {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

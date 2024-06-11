@@ -22,12 +22,12 @@ class ApiCharacterController extends AbstractController
         private HttpClientInterface $client
     ) {
     }
-    #[Route('/', name: 'app_character_index', methods: ['GET'])]
+    #[Route('/', name: 'api_character_index', methods: ['GET'])]
     public function index(Request $request): Response
     {
         $response = $this->client->request(
             'GET',
-            $this->getParameter('app.api_url') . '/characters/?size=5',
+            $this->getParameter('app.api_url') . '/characters/?size=10',
             [
                 'auth_bearer' => $request->getSession()->get('token'), // Récupération du token
             ]
@@ -38,7 +38,7 @@ class ApiCharacterController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_character_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'api_character_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $character = new Character();
@@ -93,8 +93,7 @@ class ApiCharacterController extends AbstractController
             ]
         );
         $character = $response->toArray();
-        // ...
-        +$form = $this->createForm(ApiCharacterType::class, $character);
+        $form = $this->createForm(ApiCharacterType::class, $character);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $request->request->all()['api_character']; // Récupération des données du formulaire
