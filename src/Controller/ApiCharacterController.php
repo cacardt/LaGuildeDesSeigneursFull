@@ -128,6 +128,26 @@ class ApiCharacterController extends AbstractController
                 ]
             );
         }
-        return $this->redirectToRoute('api_character_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('api_character_intelligence_number', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/characters/intelligence/{intelligence}', name: 'api_character_intelligence', methods: ['GET'])]
+    public function getIntelligence(Request $request, int $intelligence): Response
+    {
+
+        $response = $this->client->request(
+            'GET',
+            $this->getParameter('app.api_url') . '/characters/intelligence',
+            [
+                'auth_bearer' => $request->getSession()->get('token'),
+                'query' => [
+                    'intelligence' => $intelligence,
+                ]
+            ]
+        );
+
+        return $this->render('api-character/index.html.twig', [
+            'characters' => $response->toArray(),
+        ]);
     }
 }
