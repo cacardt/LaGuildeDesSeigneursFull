@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Character index{% endblock %}
+
+{% block body %}
+    <h1>Index de Personnages</h1>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">Kind</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Surname</th>
+            <th class="text-center">Caste</th>
+            <th class="text-center">Knowledge</th>
+            <th class="text-center">Intelligence</th>
+            <th class="text-center">Strength</th>
+            <th class="text-center">Creation</th>
+            <th class="text-center">Modification</th>
+            <th class="text-center">Slug</th>
+            <th class="text-center">actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for character in characters %}
+        <tr class="table-row">
+        {% if character.kind == "Dame" %}
+            <td class="text-center"><strong>{{ character.kind }}</strong></td>
+        {% else %}
+            <td class="text-center">{{ character.kind }}</td>
+        {% endif %}
+            <td class="text-center">
+                <a class="text-decoration-none text-dark" href="{{ path('app_character_show', {'identifier': character.identifier}) }}">{{ character.name }}</a>
+            </td>
+            <td class="text-center">{{ character.surname }}</td>
+            <td class="text-center">{{ character.caste }}</td>
+            <td class="text-center">{{ character.knowledge }}</td>
+            <td class="text-center">{{ character.intelligence }}</td>
+            <td class="text-center">{{ character.strength }}</td>
+            <td class="text-center">{{ character.creation ? character.creation|date("d/m/Y") : '' }}</td>
+            <td class="text-center">{{ character.modification ? character.modification|date("d/m/Y") : '' }}</td>
+            <td class="text-center">{{ character.slug }}</td>
+            <td class="text-center">
+                <a href="{{ path('app_character_edit', {'identifier': character.identifier}) }}">Modifier</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="14">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-primary position-relative" href="{{ path('app_character_new') }}">Nouveau Character</a>
+    </div>
+{% endblock %}
+
