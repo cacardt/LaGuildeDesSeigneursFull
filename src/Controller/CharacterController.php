@@ -30,6 +30,7 @@ class CharacterController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $character->setIdentifier(hash('sha1', uniqid()));
             $entityManager->persist($character);
             $entityManager->flush();
 

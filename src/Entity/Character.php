@@ -52,6 +52,9 @@ class Character
     #[ORM\Column(length: 20)]
     private ?string $slug = null;
 
+    #[ORM\ManyToOne(inversedBy: 'characters')]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -197,6 +200,18 @@ class Character
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
